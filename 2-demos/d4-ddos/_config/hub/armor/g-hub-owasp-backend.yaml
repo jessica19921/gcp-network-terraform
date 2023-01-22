@@ -1,0 +1,99 @@
+---
+adaptiveProtectionConfig:
+  layer7DdosDefenseConfig:
+    enable: true
+    ruleVisibility: STANDARD
+description: CLOUD_ARMOR
+kind: compute#securityPolicy
+type: CLOUD_ARMOR
+name: g-hub-backend-policy
+rules:
+- action: deny-403
+  description: default
+  kind: compute#securityPolicyRule
+  match:
+    config:
+      srcIpRanges:
+      - *
+    versionedExpr: SRC_IPS_V1
+  preview: false
+  priority: 2147483647
+- action: deny-403
+  description: hacker
+  kind: compute#securityPolicyRule
+  match:
+    expr:
+      expression: origin.region_code == 'GB' && request.headers['Referer'].contains('hacker')
+  preview: true
+  priority: 700
+- action: deny-403
+  description: lfi
+  kind: compute#securityPolicyRule
+  match:
+    expr:
+      expression: evaluatePreconfiguredExpr('lfi-stable')
+  preview: false
+  priority: 100
+- action: deny-403
+  description: protocol
+  kind: compute#securityPolicyRule
+  match:
+    expr:
+      expression: evaluatePreconfiguredExpr('protocolattack-stable')
+  preview: false
+  priority: 400
+- action: allow
+  description: ranges
+  kind: compute#securityPolicyRule
+  match:
+    config:
+      srcIpRanges:
+      - 88.98.202.212
+      - 34.105.154.136
+      - 35.246.111.176
+      - 34.142.67.139
+      - 35.242.128.12
+    versionedExpr: SRC_IPS_V1
+  preview: false
+  priority: 1000
+- action: deny-403
+  description: rce
+  kind: compute#securityPolicyRule
+  match:
+    expr:
+      expression: evaluatePreconfiguredExpr('rce-stable')
+  preview: false
+  priority: 200
+- action: deny-403
+  description: scanners
+  kind: compute#securityPolicyRule
+  match:
+    expr:
+      expression: evaluatePreconfiguredExpr('scannerdetection-stable')
+  preview: false
+  priority: 300
+- action: deny-403
+  description: session
+  kind: compute#securityPolicyRule
+  match:
+    expr:
+      expression: evaluatePreconfiguredExpr('sessionfixation-stable')
+  preview: false
+  priority: 500
+- action: deny-403
+  description: sqli
+  kind: compute#securityPolicyRule
+  match:
+    expr:
+      expression: evaluatePreconfiguredExpr('sqli-stable',['owasp-crs-v030001-id942421-sqli','owasp-crs-v030001-id942200-sqli','owasp-crs-v030001-id942260-sqli','owasp-crs-v030001-id942340-sqli','owasp-crs-v030001-id942430-sqli','owasp-crs-v030001-id942431-sqli','owasp-crs-v030001-id942432-sqli','owasp-crs-v030001-id942420-sqli','owasp-crs-v030001-id942440-sqli','owasp-crs-v030001-id942450-sqli'])
+  preview: false
+  priority: 600
+- action: deny-403
+  description: xss
+  kind: compute#securityPolicyRule
+  match:
+    expr:
+      expression: evaluatePreconfiguredExpr('xss-stable')
+  preview: true
+  priority: 800
+

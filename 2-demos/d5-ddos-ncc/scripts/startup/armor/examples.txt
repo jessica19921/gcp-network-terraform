@@ -1,0 +1,42 @@
+
+
+locals {
+  hub_xlb7_url_map_name = "${local.hub_prefix}xlb7-url-map"
+  hub_xlb7_url_map_yaml = templatefile("scripts/startup/armor/url-map-01.yaml", {
+    URL_MAP_NAME = local.hub_xlb7_url_map_name
+    # default
+    HOST_GOOD    = trimsuffix(local.hub_xlb7_host_secure, ".")
+    HOST_BAD     = trimsuffix(local.hub_xlb7_host_unsecure, ".")
+    BES_MIG_GOOD = module.hub_xlb7_backend_service.backend_service_mig["secure"].self_link
+    BES_NEG_GOOD = module.hub_xlb7_backend_service.backend_service_neg["secure"].self_link
+    BES_MIG_BAD  = module.hub_xlb7_backend_service.backend_service_mig["unsecure"].self_link
+    # juice
+    HOST_GOOD_JUICE    = trimsuffix(local.hub_xlb7_host_secure_juice, ".")
+    HOST_BAD_JUICE     = trimsuffix(local.hub_xlb7_host_unsecure_juice, ".")
+    BES_MIG_GOOD_JUICE = module.hub_xlb7_backend_service_juice.backend_service_mig["secure-juice"].self_link
+    BES_MIG_BAD_JUICE  = module.hub_xlb7_backend_service_juice.backend_service_mig["unsecure-juice"].self_link
+  })
+  hub_xlb7_url_map_create = templatefile("scripts/url/create.sh", {
+    PROJECT_ID   = var.project_id_hub
+    URL_MAP_NAME = local.hub_xlb7_url_map_name
+    YAML         = local.hub_xlb7_url_map_yaml
+  })
+  hub_xlb7_url_map_delete = templatefile("scripts/url/delete.sh", {
+    PROJECT_ID   = var.project_id_hub
+    URL_MAP_NAME = local.hub_xlb7_url_map_name
+  })
+}
+
+resource "null_resource" "hub_xlb7_url_map" {
+  triggers = {
+    create = local.hub_xlb7_url_map_create
+    delete = local.hub_xlb7_url_map_delete
+  }
+  provisioner "local-exec" {
+    command = self.triggers.create
+  }
+  provisioner "local-exec" {
+    when    = destroy
+    command = self.triggers.delete
+  }
+}
