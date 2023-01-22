@@ -136,7 +136,7 @@ resource "google_compute_ha_vpn_gateway" "spoke2_us_gw" {
 # hub
 
 module "vpn_hub_eu_to_site1" {
-  source             = "github.com/terraform-google-modules/cloud-foundation-fabric//modules/net-vpn-ha"
+  source             = "github.com/terraform-google-modules/cloud-foundation-fabric//modules/net-vpn-ha?ref=v15.0.0"
   project_id         = var.project_id_hub
   region             = local.hub_eu_region
   network            = google_compute_network.hub_vpc.self_link
@@ -190,7 +190,7 @@ module "vpn_hub_eu_to_site1" {
 # site1
 
 module "vpn_site1_to_hub_eu" {
-  source             = "github.com/terraform-google-modules/cloud-foundation-fabric//modules/net-vpn-ha"
+  source             = "github.com/terraform-google-modules/cloud-foundation-fabric//modules/net-vpn-ha?ref=v15.0.0"
   project_id         = var.project_id_onprem
   region             = local.site1_region
   network            = google_compute_network.site1_vpc.self_link
@@ -247,7 +247,7 @@ module "vpn_site1_to_hub_eu" {
 # hub
 
 module "vpn_hub_us_to_site2" {
-  source             = "github.com/terraform-google-modules/cloud-foundation-fabric//modules/net-vpn-ha"
+  source             = "github.com/terraform-google-modules/cloud-foundation-fabric//modules/net-vpn-ha?ref=v15.0.0"
   project_id         = var.project_id_hub
   region             = local.hub_us_region
   network            = google_compute_network.hub_vpc.self_link
@@ -301,7 +301,7 @@ module "vpn_hub_us_to_site2" {
 # site2
 
 module "vpn_site2_to_hub_us" {
-  source             = "github.com/terraform-google-modules/cloud-foundation-fabric//modules/net-vpn-ha"
+  source             = "github.com/terraform-google-modules/cloud-foundation-fabric//modules/net-vpn-ha?ref=v15.0.0"
   project_id         = var.project_id_onprem
   region             = local.site2_region
   network            = google_compute_network.site2_vpc.self_link
@@ -358,7 +358,7 @@ module "vpn_site2_to_hub_us" {
 # hub
 
 module "vpn_hub_us_to_spoke2" {
-  source             = "github.com/terraform-google-modules/cloud-foundation-fabric//modules/net-vpn-ha"
+  source             = "github.com/terraform-google-modules/cloud-foundation-fabric//modules/net-vpn-ha?ref=v15.0.0"
   project_id         = var.project_id_hub
   region             = local.hub_us_region
   network            = google_compute_network.hub_vpc.self_link
@@ -412,7 +412,7 @@ module "vpn_hub_us_to_spoke2" {
 # spoke2
 
 module "vpn_spoke2_to_hub_us" {
-  source             = "github.com/terraform-google-modules/cloud-foundation-fabric//modules/net-vpn-ha"
+  source             = "github.com/terraform-google-modules/cloud-foundation-fabric//modules/net-vpn-ha?ref=v15.0.0"
   project_id         = var.project_id_spoke2
   region             = local.spoke2_us_region
   network            = google_compute_network.spoke2_vpc.self_link

@@ -103,7 +103,7 @@ resource "google_service_networking_connection" "spoke2_us_psa_ranges" {
 #---------------------------------
 
 module "spoke2_nat" {
-  source                = "github.com/terraform-google-modules/cloud-foundation-fabric//modules/net-cloudnat"
+  source                = "github.com/terraform-google-modules/cloud-foundation-fabric//modules/net-cloudnat?ref=v15.0.0"
   for_each              = toset(local.spoke2_regions)
   project_id            = var.project_id_spoke2
   region                = each.key
@@ -117,7 +117,7 @@ module "spoke2_nat" {
 #---------------------------------
 
 module "spoke2_vpc_firewall" {
-  source              = "github.com/terraform-google-modules/cloud-foundation-fabric//modules/net-vpc-firewall"
+  source              = "github.com/terraform-google-modules/cloud-foundation-fabric//modules/net-vpc-firewall?ref=v15.0.0"
   project_id          = var.project_id_spoke2
   network             = google_compute_network.spoke2_vpc.name
   admin_ranges        = []
@@ -320,7 +320,7 @@ resource "null_resource" "spoke2_dns_rp_rules_bypass" {
 # psc zone
 
 module "spoke2_dns_psc" {
-  source      = "github.com/terraform-google-modules/cloud-foundation-fabric//modules/dns"
+  source      = "github.com/terraform-google-modules/cloud-foundation-fabric//modules/dns?ref=v15.0.0"
   project_id  = var.project_id_spoke2
   type        = "private"
   name        = "${local.spoke2_prefix}psc"
@@ -339,7 +339,7 @@ module "spoke2_dns_psc" {
 # local zone
 
 module "spoke2_dns_private_zone" {
-  source      = "github.com/terraform-google-modules/cloud-foundation-fabric//modules/dns"
+  source      = "github.com/terraform-google-modules/cloud-foundation-fabric//modules/dns?ref=v15.0.0"
   project_id  = var.project_id_spoke2
   type        = "private"
   name        = "${local.spoke2_prefix}private"
@@ -361,7 +361,7 @@ module "spoke2_dns_private_zone" {
 # onprem zone
 
 module "spoke2_dns_peering_to_hub_to_onprem" {
-  source          = "github.com/terraform-google-modules/cloud-foundation-fabric//modules/dns"
+  source          = "github.com/terraform-google-modules/cloud-foundation-fabric//modules/dns?ref=v15.0.0"
   project_id      = var.project_id_spoke2
   type            = "peering"
   name            = "${local.spoke2_prefix}to-hub-to-onprem"
@@ -374,7 +374,7 @@ module "spoke2_dns_peering_to_hub_to_onprem" {
 # sd zone
 
 module "spoke2_sd_td" {
-  source      = "github.com/terraform-google-modules/cloud-foundation-fabric//modules/dns"
+  source      = "github.com/terraform-google-modules/cloud-foundation-fabric//modules/dns?ref=v15.0.0"
   project_id  = var.project_id_spoke2
   type        = "service-directory"
   name        = "${local.spoke2_prefix}sd-td"
@@ -389,7 +389,7 @@ module "spoke2_sd_td" {
 }
 
 module "spoke2_sd_psc" {
-  source      = "github.com/terraform-google-modules/cloud-foundation-fabric//modules/dns"
+  source      = "github.com/terraform-google-modules/cloud-foundation-fabric//modules/dns?ref=v15.0.0"
   project_id  = var.project_id_spoke2
   type        = "service-directory"
   name        = "${local.spoke2_prefix}sd-psc"
@@ -466,7 +466,7 @@ locals {
 # reverse lookup zone (self-managed reverse lookup zones)
 
 module "spoke2_eu_subnet1_reverse_custom" {
-  source      = "github.com/terraform-google-modules/cloud-foundation-fabric//modules/dns"
+  source      = "github.com/terraform-google-modules/cloud-foundation-fabric//modules/dns?ref=v15.0.0"
   project_id  = var.project_id_spoke2
   type        = "private"
   name        = "${local.spoke2_prefix}eu-subnet1-reverse-custom"
@@ -484,7 +484,7 @@ module "spoke2_eu_subnet1_reverse_custom" {
 }
 
 module "spoke2_us_subnet1_reverse_custom" {
-  source      = "github.com/terraform-google-modules/cloud-foundation-fabric//modules/dns"
+  source      = "github.com/terraform-google-modules/cloud-foundation-fabric//modules/dns?ref=v15.0.0"
   project_id  = var.project_id_spoke2
   type        = "private"
   name        = "${local.spoke2_prefix}us-subnet1-reverse-custom"
@@ -572,7 +572,7 @@ resource "google_compute_instance_group" "spoke2_us_ilb4_ig" {
 }
 
 module "spoke2_us_ilb4" {
-  source        = "github.com/terraform-google-modules/cloud-foundation-fabric//modules/net-ilb"
+  source        = "github.com/terraform-google-modules/cloud-foundation-fabric//modules/net-ilb?ref=v15.0.0"
   project_id    = var.project_id_spoke2
   region        = local.spoke2_us_region
   name          = "${local.spoke2_prefix}us-ilb4"

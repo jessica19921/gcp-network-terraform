@@ -86,7 +86,7 @@ resource "google_service_networking_connection" "spoke1_eu_psa_ranges" {
 #---------------------------------
 
 module "spoke1_nat" {
-  source                = "github.com/terraform-google-modules/cloud-foundation-fabric//modules/net-cloudnat"
+  source                = "github.com/terraform-google-modules/cloud-foundation-fabric//modules/net-cloudnat?ref=v15.0.0"
   for_each              = toset(local.spoke1_regions)
   project_id            = var.project_id_host
   region                = each.key
@@ -100,7 +100,7 @@ module "spoke1_nat" {
 #---------------------------------
 
 module "spoke1_vpc_firewall" {
-  source              = "github.com/terraform-google-modules/cloud-foundation-fabric//modules/net-vpc-firewall"
+  source              = "github.com/terraform-google-modules/cloud-foundation-fabric//modules/net-vpc-firewall?ref=v15.0.0"
   project_id          = var.project_id_host
   network             = google_compute_network.spoke1_vpc.name
   admin_ranges        = []

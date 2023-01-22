@@ -40,7 +40,7 @@ resource "google_compute_subnetwork" "site2_subnets" {
 #---------------------------------
 
 module "site2_nat" {
-  source                = "github.com/terraform-google-modules/cloud-foundation-fabric//modules/net-cloudnat"
+  source                = "github.com/terraform-google-modules/cloud-foundation-fabric//modules/net-cloudnat?ref=v15.0.0"
   for_each              = toset(local.site2_regions)
   project_id            = var.project_id_onprem
   region                = each.key
@@ -54,7 +54,7 @@ module "site2_nat" {
 #---------------------------------
 
 module "site2_vpc_firewall" {
-  source              = "github.com/terraform-google-modules/cloud-foundation-fabric//modules/net-vpc-firewall"
+  source              = "github.com/terraform-google-modules/cloud-foundation-fabric//modules/net-vpc-firewall?ref=v15.0.0"
   project_id          = var.project_id_onprem
   network             = google_compute_network.site2_vpc.name
   admin_ranges        = []
@@ -140,7 +140,7 @@ resource "time_sleep" "site2_dns_forward_to_dns_wait_120s" {
 }
 
 module "site2_dns_forward_to_dns" {
-  source          = "github.com/terraform-google-modules/cloud-foundation-fabric//modules/dns"
+  source          = "github.com/terraform-google-modules/cloud-foundation-fabric//modules/dns?ref=v15.0.0"
   project_id      = var.project_id_onprem
   type            = "forwarding"
   name            = "${local.site2_prefix}to-dns"

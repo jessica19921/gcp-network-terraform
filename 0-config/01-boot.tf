@@ -303,7 +303,7 @@ module "hub_eu_run_flasky" {
 module "hub_eu_storage_bucket" {
   source        = "github.com/terraform-google-modules/cloud-foundation-fabric//modules/gcs"
   project_id    = var.project_id_hub
-  prefix        = ""
+  prefix        = null
   name          = "${local.hub_prefix}eu-storage-bucket"
   location      = local.hub_eu_region
   storage_class = "STANDARD"
@@ -328,7 +328,7 @@ resource "google_storage_bucket_object" "hub_eu_storage_bucket_file" {
 module "hub_us_storage_bucket" {
   source        = "github.com/terraform-google-modules/cloud-foundation-fabric//modules/gcs"
   project_id    = var.project_id_hub
-  prefix        = ""
+  prefix        = null
   name          = "${local.hub_prefix}us-storage-bucket"
   location      = local.hub_us_region
   storage_class = "STANDARD"
@@ -452,7 +452,7 @@ module "spoke1_eu_run_flasky" {
 module "spoke1_eu_storage_bucket" {
   source        = "github.com/terraform-google-modules/cloud-foundation-fabric//modules/gcs"
   project_id    = var.project_id_spoke1
-  prefix        = ""
+  prefix        = null
   name          = "${local.spoke1_prefix}eu-storage-bucket"
   location      = local.spoke1_eu_region
   storage_class = "STANDARD"
@@ -569,7 +569,7 @@ module "spoke2_us_run_flasky" {
 module "spoke2_us_storage_bucket" {
   source        = "github.com/terraform-google-modules/cloud-foundation-fabric//modules/gcs"
   project_id    = var.project_id_spoke2
-  prefix        = ""
+  prefix        = null
   name          = "${local.spoke2_prefix}us-storage-bucket"
   location      = local.spoke2_us_region
   storage_class = "STANDARD"
