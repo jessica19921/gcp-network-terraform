@@ -321,7 +321,7 @@ resource "local_file" "case1_delete" {
 
 # hub vertex natgw
 #---------------------------------
-/*
+
 locals {
   hub_eu_vertex_natgw_startup = templatefile("scripts/startup/natgw.sh", {})
 }
@@ -375,4 +375,4 @@ resource "google_compute_route" "hub_eu_vertex_natgw_super" {
   next_hop_gateway = "default-internet-gateway"
   tags             = ["nat"]
   priority         = 80
-}*/
+}

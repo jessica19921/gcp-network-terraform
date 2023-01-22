@@ -138,7 +138,7 @@ locals {
   })
 }
 
-resource "null_resource" "hub_sn_vpcsc_config" {
+/*resource "null_resource" "hub_sn_vpcsc_config" {
   triggers = {
     create = local.hub_sn_vpcsc_config_create
     delete = local.hub_sn_vpcsc_config_delete
@@ -150,7 +150,7 @@ resource "null_resource" "hub_sn_vpcsc_config" {
     when    = destroy
     command = self.triggers.delete
   }
-}
+}*/
 
 # dns config
 

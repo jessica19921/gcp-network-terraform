@@ -240,7 +240,7 @@ resource "google_compute_instance_from_template" "site1_td_client" {
     scopes = ["cloud-platform"]
   }
   source_instance_template = data.google_compute_instance_template.site1_td_client_tpl.name
-}
+}*/
 
 # vertex test server
 #---------------------------------
@@ -291,4 +291,4 @@ module "site1_vertex_vm" {
   service_account         = module.site1_sa.email
   service_account_scopes  = ["cloud-platform"]
   metadata_startup_script = local.vertex_vm_startup
-}*/
+}
