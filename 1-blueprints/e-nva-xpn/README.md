@@ -1,7 +1,7 @@
 
 
 # LAB E: NVA with Shared VPC
-*Google INTERNAL only!!! Do not share externally.*
+
 
 This code deploys the following:
 - An NVA hub and spoke topology with VPC peering to the spokes. NVA appliances are simulated using iptables on Linux instances. North-south and east-west traffic is allowed via the NVA instances.

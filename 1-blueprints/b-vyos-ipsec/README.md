@@ -1,6 +1,6 @@
 
 # LAB B: Hub and Spoke with Appliance IPsec tunnel to on-premises
-*Google INTERNAL only!!! Do not share externally.*
+
 
 This code deploys the following:
 - A hub and spoke topology with two spoke VPCs

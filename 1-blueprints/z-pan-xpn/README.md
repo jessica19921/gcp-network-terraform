@@ -1,7 +1,5 @@
 
-
 # LAB E: NVA with Shared VPC
-*Google INTERNAL only!!! Do not share externally as lab contains internal Google links and some GCP alpha features*
 
 This code deploys the following:
 - an NVA hub and spoke topology with VPC peering to the spokes

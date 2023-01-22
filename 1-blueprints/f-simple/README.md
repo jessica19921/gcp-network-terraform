@@ -1,6 +1,6 @@
 
 # LAB A: Hub and Spoke
-*Google INTERNAL only!!! Do not share externally*
+
 
 This code deploys the following:
 - A hub and spoke topology with two spoke VPCs
